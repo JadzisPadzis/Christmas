@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ziemassvetku kartite</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            background-color: #25856d; /* Dark background for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        /* Animation to make the snowflakes fall */
+        @keyframes fall {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) translateX(50px);
+                opacity: 0.3;
+            }
+        }
+
+        /* Randomize animation speed and direction */
+        .snowflake:nth-child(odd) {
+            animation-duration: calc(5s + (random() * 5s));
+            animation-delay: calc(random() * 5s);
+        }
+
+        .snowflake:nth-child(even) {
+            animation-duration: calc(4s + (random() * 6s));
+            animation-delay: calc(random() * 6s);
+        }
+
+        .card {
+            text-align: center;
+            color: white;
+            background-color: rgb(163, 27, 27); /* Darker background */
+            padding: 75px;
+            border-radius: 15px;
+            /* height: 300px; */
+            width: 400px;
+            position: relative;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        img {
+            width: 350px;
+            border-radius: 15px;
+            margin: 45px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card" onmouseover="changeText(this)" onmouseout="resetText(this)">
+        <h1>Priecīgus Ziemassvētkus</h1>
+        <p>Dzejolīšus šogad neiemācījos, tāpēc uztaisīju kartīti.</p>
+    </div>
+
+    <img src="./GitHub/santa.jpg" alt="santa">
+    
+    <script>
+        // Create snowflakes randomly
+        const numberOfSnowflakes = 100;
+        const snowflakesContainer = document.body;
+
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+
+            // Set random positions and speeds for the snowflakes
+            snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // Random speed of falling
+
+            snowflakesContainer.appendChild(snowflake);
+        }
+
+        // Function to change text on hover
+        function changeText(element) {
+            // Change the text inside <h1> and <p>
+            element.querySelector('h1').innerText = "Paldies!";
+            element.querySelector('p').innerText = " ";
+        }
+
+        // Function to reset text when the mouse leaves
+        function resetText(element) {
+            // Reset the text back to original
+            element.querySelector('h1').innerText = "Priecīgus Ziemassvētkus";
+            element.querySelector('p').innerText = "Dzejolīšus šogad neiemācījos, tāpēc uztaisīju kartīti.";
+        }
+
+    </script>
+</body>
+</html>
